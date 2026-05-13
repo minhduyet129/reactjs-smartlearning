@@ -1,1505 +1,1304 @@
-# TÀI LIỆU TOÀN DIỆN VỀ REACTJS
+# TÀI LIỆU REACTJS TỪ CƠ BẢN ĐẾN PRODUCTION
 
 ## Mục lục
 
-1. [Giới thiệu về ReactJS](#1-giới-thiệu-về-reactjs)
-2. [Core Concepts](#2-core-concepts)
-3. [State Management](#3-state-management)
-4. [Routing với React Router](#4-routing-với-react-router)
-5. [Data Fetching](#5-data-fetching)
-6. [Performance Optimization](#6-performance-optimization)
-7. [Testing](#7-testing)
-8. [Build Tools và Development Workflow](#8-build-tools-và-development-workflow)
-9. [TypeScript Integration](#9-typescript-integration)
-10. [Best Practices và Code Structure](#10-best-practices-và-code-structure)
-11. [Security Considerations](#11-security-considerations)
-12. [Accessibility (a11y)](#12-accessibility-a11y)
-13. [Design Patterns](#13-design-patterns)
-14. [Deployment Strategies](#14-deployment-strategies)
-15. [Learning Roadmap](#15-learning-roadmap)
-16. [Checklist đánh giá Code Quality](#16-checklist-đánh-giá-code-quality)
+1. [Cách dùng tài liệu này](#1-cách-dùng-tài-liệu-này)
+2. [React là gì](#2-react-là-gì)
+3. [Bạn cần biết gì trước khi học React](#3-bạn-cần-biết-gì-trước-khi-học-react)
+4. [Khởi động dự án React](#4-khởi-động-dự-án-react)
+5. [Tư duy cốt lõi của React](#5-tư-duy-cốt-lõi-của-react)
+6. [Core Concepts: JSX, Component, Props, State](#6-core-concepts-jsx-component-props-state)
+7. [Hooks quan trọng](#7-hooks-quan-trọng)
+8. [Forms và validation](#8-forms-và-validation)
+9. [React Router](#9-react-router)
+10. [Data Fetching và API](#10-data-fetching-và-api)
+11. [State Management](#11-state-management)
+12. [TypeScript với React](#12-typescript-với-react)
+13. [Testing](#13-testing)
+14. [Performance Optimization](#14-performance-optimization)
+15. [Code Structure và Best Practices](#15-code-structure-và-best-practices)
+16. [Accessibility, Security, Error Handling](#16-accessibility-security-error-handling)
+17. [Build Tools và Deployment](#17-build-tools-và-deployment)
+18. [Design Patterns thường gặp](#18-design-patterns-thường-gặp)
+19. [Dự án thực hành theo lộ trình](#19-dự-án-thực-hành-theo-lộ-trình)
+20. [Learning Roadmap để đi làm](#20-learning-roadmap-để-đi-làm)
+21. [Checklist đánh giá code quality](#21-checklist-đánh-giá-code-quality)
+22. [Tài liệu tham khảo](#22-tài-liệu-tham-khảo)
 
 ---
 
-## 1. Giới thiệu về ReactJS
+## 1. Cách dùng tài liệu này
 
-### 1.1 ReactJS là gì?
+Tài liệu này được viết cho người mới học React nhưng vẫn đủ rộng để bạn dùng tiếp khi bước vào môi trường làm việc thực tế.
 
-ReactJS là một thư viện JavaScript mã nguồn mở được phát triển bởi Facebook (Meta) để xây dựng giao diện người dùng (UI). React sử dụng mô hình **Component-Based Architecture** và **Declarative Programming**, giúp lập trình viên xây dựng các ứng dụng web phức tạp một cách dễ dàng và có tổ chức.
+### Cách học hiệu quả
 
-### 1.2 Tại sao nên học ReactJS?
+1. Học theo đúng thứ tự từ phần `2` đến phần `10`.
+2. Sau mỗi phần, tự viết lại ít nhất 1 ví dụ nhỏ.
+3. Sau khi nắm core concepts, bắt đầu làm dự án CRUD nhỏ.
+4. Chỉ học tối ưu, architecture, CI/CD sau khi đã xây được app hoàn chỉnh.
 
-| Ưu điểm | Mô tả |
-|---------|-------|
-| Virtual DOM | React sử dụng Virtual DOM để tối ưu hóa việc cập nhật giao diện, chỉ re-render những phần thực sự thay đổi |
-| Component Reusability | Tái sử dụng component giúp giảm code trùng lặp và dễ bảo trì |
-| Ecosystem phong phú | Hệ sinh thái lớn với nhiều thư viện hỗ trợ |
-| Hỗ trợ TypeScript | React có hỗ trợ TypeScript tốt từ đầu |
-| Cộng đồng lớn | Cộng đồng developer lớn, nhiều tài liệu và hỗ trợ |
-| Job Market | Nhu cầu tuyển dụng cao trên thị trường lao động |
+### Nguyên tắc quan trọng
+
+- Không cần học thuộc code mẫu.
+- Cần hiểu vì sao code hoạt động.
+- Ưu tiên làm dự án nhỏ liên tục hơn là chỉ đọc tài liệu.
 
 ---
 
-## 2. Core Concepts
+## 2. React là gì
 
-### 2.1 Components
+React là một thư viện JavaScript dùng để xây dựng giao diện người dùng theo mô hình component.
 
-#### 2.1.1 Functional Components
+### Hiểu ngắn gọn
+
+- HTML mô tả cấu trúc giao diện.
+- CSS mô tả cách giao diện hiển thị.
+- JavaScript mô tả hành vi.
+- React giúp bạn chia giao diện thành các khối nhỏ, tái sử dụng được và dễ bảo trì hơn.
+
+### Vì sao React phổ biến
+
+- Có tư duy component rất rõ ràng.
+- Dễ quản lý state hơn so với thao tác DOM thủ công.
+- Hệ sinh thái lớn: Router, form, state management, testing, deployment.
+- Được dùng rộng rãi trong doanh nghiệp.
+
+---
+
+## 3. Bạn cần biết gì trước khi học React
+
+Trước khi học React, bạn nên có nền tảng:
+
+- HTML semantic
+- CSS cơ bản, responsive
+- JavaScript ES6+
+- Array methods như `map`, `filter`, `find`
+- `Promise`, `async/await`, `fetch`
+- DOM và event cơ bản
+
+### Dấu hiệu bạn đã sẵn sàng
+
+- Hiểu vì sao `map()` dùng để render list.
+- Hiểu spread operator `...`.
+- Biết object và array nên được cập nhật theo kiểu immutable.
+
+---
+
+## 4. Khởi động dự án React
+
+Người mới nên bắt đầu bằng `Vite`.
+
+```bash
+npm create vite@latest my-react-app -- --template react
+cd my-react-app
+npm install
+npm run dev
+```
+
+### Cấu trúc cơ bản
+
+```txt
+src/
+  App.jsx
+  main.jsx
+  assets/
+```
+
+### Vai trò của từng file
+
+- `main.jsx`: mount ứng dụng React vào DOM.
+- `App.jsx`: component gốc của ứng dụng.
+
+---
+
+## 5. Tư duy cốt lõi của React
+
+Đây là phần quan trọng nhất. Nếu hiểu sai tư duy, bạn sẽ thấy React khó hơn thực tế.
+
+### 5.1 UI là hàm của state
+
+Có thể hiểu theo công thức:
+
+```txt
+UI = f(state)
+```
+
+Nghĩa là khi state thay đổi, React sẽ render lại UI tương ứng.
+
+### 5.2 Component là đơn vị cơ bản
+
+Mỗi phần giao diện nên được tách thành component:
+
+- `Header`
+- `Sidebar`
+- `UserCard`
+- `TodoItem`
+
+### 5.3 Dữ liệu chảy từ trên xuống
+
+Cha truyền dữ liệu xuống con qua `props`.
+
+```txt
+App -> ProductList -> ProductCard
+```
+
+### 5.4 Không ưu tiên thao tác DOM thủ công
+
+Trong React, bạn không ưu tiên:
+
+```js
+document.getElementById("title").innerText = "Hello";
+```
+
+Bạn ưu tiên cập nhật state để React lo phần render giao diện.
+
+---
+
+## 6. Core Concepts: JSX, Component, Props, State
+
+## 6.1 JSX là gì
+
+JSX là cú pháp cho phép bạn viết UI trong JavaScript theo cách gần giống HTML.
 
 ```jsx
-function Welcome({ name, age }) {
+const element = <h1>Hello React</h1>;
+```
+
+### Lưu ý
+
+- JSX không phải HTML thật.
+- Dùng `className` thay vì `class`.
+- Dùng `{}` để chèn JavaScript vào JSX.
+
+```jsx
+const name = "An";
+
+export default function App() {
+  return <h1>Xin chào {name}</h1>;
+}
+```
+
+## 6.2 Component
+
+Component là hàm trả về JSX.
+
+```jsx
+function Welcome() {
+  return <h2>Welcome to React</h2>;
+}
+```
+
+### Quy tắc đặt tên
+
+- Component phải viết hoa chữ cái đầu.
+- Một component nên có một trách nhiệm chính.
+
+## 6.3 Props
+
+Props là dữ liệu cha truyền xuống con.
+
+```jsx
+function UserCard({ name, role }) {
   return (
-    <div className="welcome-container">
-      <h1>Xin chào, {name}!</h1>
-      <p>Tuổi: {age}</p>
+    <div>
+      <h3>{name}</h3>
+      <p>{role}</p>
     </div>
   );
 }
 
-const UserCard = ({ username, avatar, role }) => {
-  return (
-    <div className="user-card">
-      <img src={avatar} alt={`${username}'s avatar`} />
-      <h2>{username}</h2>
-      <span className="role-badge">{role}</span>
-    </div>
-  );
-};
-```
-
-#### 2.1.2 Class Components
-
-```jsx
-class Counter extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { count: 0 };
-    this.handleIncrement = this.handleIncrement.bind(this);
-  }
-
-  handleIncrement() {
-    this.setState(prevState => ({ count: prevState.count + 1 }));
-  }
-
-  render() {
-    return (
-      <div className="counter">
-        <p>Count: {this.state.count}</p>
-        <button onClick={this.handleIncrement}>Increment</button>
-      </div>
-    );
-  }
+export default function App() {
+  return <UserCard name="Ngọc" role="Frontend Developer" />;
 }
 ```
 
-#### 2.1.3 Component Composition
+### Cần nhớ
+
+- Props là read-only.
+- Component con không nên sửa trực tiếp props.
+- Nếu cần thay đổi dữ liệu, hãy dùng state ở component cha.
+
+## 6.4 State
+
+State là dữ liệu nội bộ của component, có thể thay đổi theo tương tác người dùng.
 
 ```jsx
-const Card = ({ title, children, footer }) => {
-  return (
-    <div className="card">
-      <div className="card-header"><h3>{title}</h3></div>
-      <div className="card-body">{children}</div>
-      {footer && <div className="card-footer">{footer}</div>}
-    </div>
-  );
-};
+import { useState } from "react";
 
-const Modal = ({ isOpen, onClose, children }) => {
-  if (!isOpen) return null;
-  return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={e => e.stopPropagation()}>
-        <button onClick={onClose}>×</button>
-        {children}
-      </div>
-    </div>
-  );
-};
-```
-
-#### 2.1.4 Pure Components
-
-```jsx
-const PureUserCard = React.memo(({ user, onSelect }) => {
-  return (
-    <div onClick={() => onSelect(user.id)}>
-      <span>{user.name}</span>
-    </div>
-  );
-});
-```
-
-### 2.2 Props
-
-#### 2.2.1 Props cơ bản
-
-```jsx
-const UserProfile = ({ name, email, avatar, role }) => {
-  return (
-    <div className="user-profile">
-      <img src={avatar} alt={name} />
-      <h2>{name}</h2>
-      <p>{email}</p>
-    </div>
-  );
-};
-
-const App = () => {
-  return <UserProfile name="Nguyễn Văn A" email="email@example.com" />;
-};
-```
-
-#### 2.2.2 PropTypes
-
-```jsx
-import PropTypes from 'prop-types';
-
-const Button = ({ label, variant = 'primary', disabled = false }) => {
-  return <button className={`btn-${variant}`} disabled={disabled}>{label}</button>;
-};
-
-Button.propTypes = {
-  label: PropTypes.string.isRequired,
-  variant: PropTypes.oneOf(['primary', 'secondary', 'danger']),
-  disabled: PropTypes.bool
-};
-```
-
-#### 2.2.3 Render Props
-
-```jsx
-const MouseTracker = ({ render }) => {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  useEffect(() => {
-    const handleMouseMove = (e) => setPosition({ x: e.clientX, y: e.clientY });
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-  return render(position);
-};
-
-const App = () => {
-  return (
-    <MouseTracker render={({ x, y }) => <div>Mouse: ({x}, {y})</div>} />
-  );
-};
-```
-
-### 2.3 State
-
-#### 2.3.1 useState
-
-```jsx
-const Counter = () => {
+function Counter() {
   const [count, setCount] = useState(0);
+
   return (
     <div>
-      <p>Count: {count}</p>
-      <button onClick={() => setCount(prev => prev + 1)}>+</button>
-      <button onClick={() => setCount(0)}>Reset</button>
+      <p>Số lần bấm: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Tăng</button>
     </div>
   );
-};
+}
+```
 
-const UserForm = () => {
-  const [formData, setFormData] = useState({ username: '', email: '' });
-  const handleChange = (e) => {
-    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
-  };
+### Khi nào dùng state
+
+- Hiện hoặc ẩn modal
+- Dữ liệu form
+- Tab đang active
+- Danh sách item sau khi gọi API
+
+## 6.5 Props vs State
+
+| Tiêu chí | Props | State |
+|---|---|---|
+| Đến từ đâu | Component cha | Component tự quản lý |
+| Có thay đổi được không | Không | Có |
+| Dùng khi nào | Truyền dữ liệu | Quản lý trạng thái thay đổi |
+
+## 6.6 Render danh sách
+
+```jsx
+const todos = [
+  { id: 1, text: "Học JSX" },
+  { id: 2, text: "Học props" },
+  { id: 3, text: "Học state" }
+];
+
+function TodoList() {
   return (
-    <form>
-      <input name="username" value={formData.username} onChange={handleChange} />
-      <input name="email" value={formData.email} onChange={handleChange} />
-    </form>
+    <ul>
+      {todos.map((todo) => (
+        <li key={todo.id}>{todo.text}</li>
+      ))}
+    </ul>
   );
-};
+}
 ```
 
-#### 2.3.2 State vs Props
+### Vì sao cần `key`
 
-| Aspect | State | Props |
-|--------|-------|-------|
-| Mục đích | Lưu trữ dữ liệu nội bộ | Truyền dữ liệu cha → con |
-| Thay đổi | Có thể thay đổi trong component | Read-only |
-| Re-render | State thay đổi → Re-render | Props thay đổi → Re-render |
+`key` giúp React biết item nào thay đổi, thêm mới hoặc bị xóa.
 
-#### 2.3.3 Lifting State Up
+## 6.7 Conditional Rendering
 
 ```jsx
-const TemperatureCalculator = () => {
-  const [celsius, setCelsius] = useState('');
-  const handleCelsiusChange = (value) => {
-    setCelsius(value);
+function UserStatus({ isLoggedIn }) {
+  return isLoggedIn ? <p>Đã đăng nhập</p> : <p>Chưa đăng nhập</p>;
+}
+```
+
+## 6.8 Event Handling
+
+```jsx
+function Button() {
+  const handleClick = () => {
+    alert("Bạn vừa bấm nút");
   };
+
+  return <button onClick={handleClick}>Click me</button>;
+}
+```
+
+## 6.9 Mini case study: Todo item
+
+```jsx
+function TodoItem({ todo, onToggle, onDelete }) {
   return (
-    <div>
-      <TemperatureInput label="Celsius" value={celsius} onChange={handleCelsiusChange} />
-    </div>
+    <li>
+      <input
+        type="checkbox"
+        checked={todo.completed}
+        onChange={() => onToggle(todo.id)}
+      />
+      <span>{todo.text}</span>
+      <button onClick={() => onDelete(todo.id)}>Xóa</button>
+    </li>
   );
-};
-
-const TemperatureInput = ({ label, value, onChange }) => {
-  return (
-    <div>
-      <label>{label}: </label>
-      <input value={value} onChange={e => onChange(e.target.value)} />
-    </div>
-  );
-};
+}
 ```
 
-### 2.4 Component Lifecycle
+Qua ví dụ trên, bạn thấy được:
 
-#### 2.4.1 Class Lifecycle
+- `todo` là props
+- `onToggle`, `onDelete` là callback props
+- Component con phát sự kiện, component cha xử lý state
 
-```
-Mounting → constructor() → render() → componentDidMount()
-Updating → render() → componentDidUpdate()
-Unmounting → componentWillUnmount()
-```
+---
 
-#### 2.4.2 Hooks Lifecycle (useEffect)
+## 7. Hooks quan trọng
+
+Hooks cho phép functional component có thêm khả năng quản lý state, side effect, context và tối ưu.
+
+## 7.1 `useState`
 
 ```jsx
-useEffect(() => {
-  // componentDidMount + componentDidUpdate
-  return () => {
-    // componentWillUnmount
-  };
-}, [dependency]);
+const [isOpen, setIsOpen] = useState(false);
 ```
 
-### 2.5 Hooks Chi Tiết
-
-#### 2.5.1 useState
+### Lỗi thường gặp
 
 ```jsx
-const [state, setState] = useState(initialValue);
-const increment = () => setState(prev => prev + 1);
+setCount(count + 1);
+setCount(count + 1);
 ```
 
-#### 2.5.2 useEffect
+Khi cập nhật dựa trên state cũ, nên dùng:
 
 ```jsx
-const UserProfile = ({ userId }) => {
+setCount((prev) => prev + 1);
+setCount((prev) => prev + 1);
+```
+
+## 7.2 `useEffect`
+
+Dùng cho side effects:
+
+- Gọi API
+- Gắn event listener
+- Đồng bộ `localStorage`
+- Đổi `document.title`
+
+```jsx
+import { useEffect, useState } from "react";
+
+function UserProfile({ userId }) {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    let isMounted = true;
-    fetch(`/api/users/${userId}`)
-      .then(res => res.json())
-      .then(data => isMounted && setUser(data));
-    return () => { isMounted = false; };
+    const controller = new AbortController();
+
+    async function fetchUser() {
+      try {
+        setLoading(true);
+        setError("");
+
+        const response = await fetch(`/api/users/${userId}`, {
+          signal: controller.signal
+        });
+
+        if (!response.ok) {
+          throw new Error("Không thể tải dữ liệu user");
+        }
+
+        const data = await response.json();
+        setUser(data);
+      } catch (err) {
+        if (err.name !== "AbortError") {
+          setError(err.message);
+        }
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchUser();
+    return () => controller.abort();
   }, [userId]);
 
-  return user ? <div>{user.name}</div> : <div>Loading...</div>;
-};
+  if (loading) return <p>Đang tải...</p>;
+  if (error) return <p>{error}</p>;
+
+  return <h2>{user?.name}</h2>;
+}
 ```
 
-#### 2.5.3 useContext
+### Cách hiểu dependency array
+
+- `[]`: chạy 1 lần sau mount
+- `[userId]`: chạy lại khi `userId` thay đổi
+- Không truyền dependency: chạy sau mọi lần render
+
+## 7.3 `useContext`
+
+Dùng khi nhiều component cần cùng một dữ liệu mà nếu truyền qua props sẽ rất dài dòng.
 
 ```jsx
-const ThemeContext = createContext({ theme: 'light', toggleTheme: () => {} });
+import { createContext, useContext, useState } from "react";
 
-const ThemedButton = () => {
-  const { theme, toggleTheme } = useContext(ThemeContext);
-  return <button className={`btn-${theme}`} onClick={toggleTheme}>Toggle</button>;
-};
-```
+const ThemeContext = createContext(null);
 
-#### 2.5.4 useReducer
+function ThemeProvider({ children }) {
+  const [theme, setTheme] = useState("light");
 
-```jsx
-const reducer = (state, action) => {
-  switch (action.type) {
-    case 'INCREMENT': return { count: state.count + 1 };
-    case 'DECREMENT': return { count: state.count - 1 };
-    default: return state;
-  }
-};
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  };
 
-const Counter = () => {
-  const [state, dispatch] = useReducer(reducer, { count: 0 });
   return (
-    <div>
-      <p>{state.count}</p>
-      <button onClick={() => dispatch({ type: 'INCREMENT' })}>+</button>
-    </div>
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      {children}
+    </ThemeContext.Provider>
   );
-};
+}
+
+function ThemeButton() {
+  const { theme, toggleTheme } = useContext(ThemeContext);
+
+  return <button onClick={toggleTheme}>Theme hiện tại: {theme}</button>;
+}
 ```
 
-#### 2.5.5 useCallback
+### Khi nào nên dùng Context
+
+- Auth user
+- Theme
+- Ngôn ngữ
+- Global UI state nhỏ
+
+## 7.4 `useReducer`
+
+Dùng khi state phức tạp hơn `useState`.
 
 ```jsx
-const handleClick = useCallback((id) => {
-  console.log('Clicked:', id);
-}, []);
+import { useReducer } from "react";
+
+const initialState = { count: 0 };
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "increment":
+      return { count: state.count + 1 };
+    case "decrement":
+      return { count: state.count - 1 };
+    case "reset":
+      return initialState;
+    default:
+      return state;
+  }
+}
 ```
 
-#### 2.5.6 useMemo
+### Dùng khi
+
+- State có nhiều trường
+- Logic update có nhiều case
+- Muốn tách logic state ra khỏi JSX
+
+## 7.5 `useRef`
 
 ```jsx
-const filteredItems = useMemo(() => {
-  return items.filter(item => item.completed);
-}, [items]);
-```
+import { useEffect, useRef } from "react";
 
-#### 2.5.7 useRef
-
-```jsx
-const AutoFocusInput = () => {
+function SearchInput() {
   const inputRef = useRef(null);
-  useEffect(() => { inputRef.current?.focus(); }, []);
-  return <input ref={inputRef} />;
-};
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
+
+  return <input ref={inputRef} placeholder="Nhập từ khóa..." />;
+}
 ```
 
-#### 2.5.8 Custom Hooks
+## 7.6 `useMemo` và `useCallback`
+
+Người mới không nên lạm dụng hai hook này quá sớm.
+
+- `useMemo`: nhớ lại giá trị đã tính toán
+- `useCallback`: nhớ lại function
+
+Chỉ dùng khi đã có dấu hiệu re-render không cần thiết hoặc tính toán nặng.
+
+## 7.7 Custom Hooks
+
+Custom hook là cách tách logic dùng lại được.
 
 ```jsx
-const useLocalStorage = (key, initialValue) => {
-  const [value, setValue] = useState(() => {
-    try { return JSON.parse(localStorage.getItem(key)) || initialValue; }
-    catch { return initialValue; }
-  });
+import { useEffect, useState } from "react";
 
-  useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(value));
-  }, [key, value]);
-
-  return [value, setValue];
-};
-
-const useFetch = (url) => {
-  const [state, setState] = useState({ data: null, loading: true, error: null });
-
-  useEffect(() => {
-    fetch(url)
-      .then(res => res.json())
-      .then(data => setState({ data, loading: false, error: null }))
-      .catch(error => setState({ data: null, loading: false, error }));
-  }, [url]);
-
-  return state;
-};
-
-const useDebounce = (value, delay) => {
+function useDebounce(value, delay = 500) {
   const [debouncedValue, setDebouncedValue] = useState(value);
+
   useEffect(() => {
     const timer = setTimeout(() => setDebouncedValue(value), delay);
     return () => clearTimeout(timer);
   }, [value, delay]);
+
   return debouncedValue;
-};
+}
 ```
 
 ---
 
-## 3. State Management
+## 8. Forms và validation
 
-### 3.1 Context API
+Forms xuất hiện liên tục trong dự án thật.
+
+## 8.1 Controlled form
 
 ```jsx
-const AuthContext = createContext(null);
+import { useState } from "react";
 
-const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const login = (credentials) => {
-    return authService.login(credentials).then(res => {
-      setUser(res.user);
-      return res;
-    });
+function LoginForm() {
+  const [form, setForm] = useState({
+    email: "",
+    password: ""
+  });
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setForm((prev) => ({
+      ...prev,
+      [name]: value
+    }));
   };
-  const logout = () => setUser(null);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(form);
+  };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
-      {children}
-    </AuthContext.Provider>
+    <form onSubmit={handleSubmit}>
+      <input
+        name="email"
+        type="email"
+        value={form.email}
+        onChange={handleChange}
+        placeholder="Email"
+      />
+      <input
+        name="password"
+        type="password"
+        value={form.password}
+        onChange={handleChange}
+        placeholder="Password"
+      />
+      <button type="submit">Đăng nhập</button>
+    </form>
   );
-};
-
-const useAuth = () => useContext(AuthContext);
+}
 ```
 
-### 3.2 Redux Toolkit
+## 8.2 Validation
 
-```jsx
-import { configureStore, createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+Bạn thường cần:
 
-const usersSlice = createSlice({
-  name: 'users',
-  initialState: { items: [], loading: false, error: null },
-  reducers: {
-    addUser: (state, action) => { state.items.push(action.payload); },
-    removeUser: (state, action) => { state.items = state.items.filter(u => u.id !== action.payload); },
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchUsers.pending, (state) => { state.loading = true; })
-      .addCase(fetchUsers.fulfilled, (state, action) => { state.items = action.payload; state.loading = false; })
-      .addCase(fetchUsers.rejected, (state, action) => { state.error = action.error.message; state.loading = false; });
-  }
-});
+- Required
+- Email format
+- Password length
+- Confirm password
 
-export const fetchUsers = createAsyncThunk('users/fetch', async () => {
-  const res = await fetch('/api/users');
-  return res.json();
-});
+### Nên học thư viện nào
 
-export const { addUser, removeUser } = usersSlice.actions;
-export const selectUsers = (state) => state.users.items;
-
-export const store = configureStore({
-  reducer: { users: usersSlice.reducer }
-});
-```
-
-### 3.3 Zustand
-
-```jsx
-import { create } from 'zustand';
-
-const useStore = create((set) => ({
-  count: 0,
-  increment: () => set((state) => ({ count: state.count + 1 })),
-  decrement: () => set((state) => ({ count: state.count - 1 })),
-  user: null,
-  setUser: (user) => set({ user }),
-}));
-
-const Counter = () => {
-  const { count, increment } = useStore();
-  return <button onClick={increment}>{count}</button>;
-};
-```
+- Để hiểu bản chất: học form thủ công trước
+- Làm việc thực tế: học `React Hook Form`
+- Validation schema: kết hợp `zod`
 
 ---
 
-## 4. React Router
+## 9. React Router
 
-### 4.1 Setup và Routes
+React Router cho phép SPA có nhiều trang theo URL.
+
+## 9.1 Setup cơ bản
 
 ```jsx
-import { BrowserRouter, Routes, Route, Link, NavLink } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
-const App = () => {
+function App() {
   return (
     <BrowserRouter>
       <nav>
         <Link to="/">Home</Link>
         <Link to="/about">About</Link>
-        <NavLink to="/users" className={({ isActive }) => isActive ? 'active' : ''}>Users</NavLink>
       </nav>
+
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/users" element={<Users />} />
-        <Route path="/users/:id" element={<UserDetail />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
       </Routes>
     </BrowserRouter>
   );
-};
+}
 ```
 
-### 4.2 Dynamic Routes
+## 9.2 Dynamic route
 
 ```jsx
-const UserDetail = () => {
+import { useParams } from "react-router-dom";
+
+function UserDetailPage() {
   const { id } = useParams();
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    fetch(`/api/users/${id}`).then(res => res.json()).then(setUser);
-  }, [id]);
-
-  return user ? <div><h2>{user.name}</h2></div> : <div>Loading...</div>;
-};
+  return <h2>User id: {id}</h2>;
+}
 ```
 
-### 4.3 Nested Routes
+## 9.3 Protected route
 
 ```jsx
-const App = () => {
-  return (
-    <Routes>
-      <Route path="/dashboard" element={<Dashboard />}>
-        <Route index element={<DashboardHome />} />
-        <Route path="analytics" element={<Analytics />} />
-        <Route path="reports" element={<Reports />} />
-      </Route>
-    </Routes>
-  );
-};
+import { Navigate } from "react-router-dom";
 
-const Dashboard = () => {
-  return (
-    <div>
-      <h1>Dashboard</h1>
-      <Outlet />
-    </div>
-  );
-};
-```
-
-### 4.4 Navigation
-
-```jsx
-const navigate = useNavigate();
-navigate('/home');
-navigate('/users', { replace: true });
-navigate(-1);
-
-const location = useLocation();
-console.log(location.pathname);
-```
-
-### 4.5 Protected Routes
-
-```jsx
-const ProtectedRoute = ({ children, isAuthenticated }) => {
-  if (!isAuthenticated) return <Navigate to="/login" replace />;
+function ProtectedRoute({ user, children }) {
+  if (!user) return <Navigate to="/login" replace />;
   return children;
-};
-
-const App = () => {
-  return (
-    <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route path="/dashboard" element={
-        <ProtectedRoute isAuthenticated={user !== null}>
-          <Dashboard />
-        </ProtectedRoute>
-      } />
-    </Routes>
-  );
-};
+}
 ```
+
+### Người mới cần học đến đâu
+
+- Route cơ bản
+- Route động
+- Nested route
+- Protected route
+- `useNavigate`, `useParams`
 
 ---
 
-## 5. Data Fetching
+## 10. Data Fetching và API
 
-### 5.1 Fetch API
+Phần lớn dự án thật đều phải giao tiếp với backend.
+
+## 10.1 Mô hình cơ bản
+
+Bạn gần như luôn cần:
+
+- `loading`
+- `error`
+- `data`
 
 ```jsx
-const fetchUsers = async () => {
-  try {
-    const response = await fetch('/api/users');
-    if (!response.ok) throw new Error('Failed to fetch');
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error('Error:', error);
-    throw error;
-  }
-};
+import { useEffect, useState } from "react";
 
-const UsersComponent = () => {
+function UserList() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    fetchUsers()
-      .then(data => setUsers(data))
-      .catch(err => setError(err.message))
-      .finally(() => setLoading(false));
+    async function fetchUsers() {
+      try {
+        setLoading(true);
+        setError("");
+
+        const response = await fetch("/api/users");
+        if (!response.ok) {
+          throw new Error("Tải dữ liệu thất bại");
+        }
+
+        const data = await response.json();
+        setUsers(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchUsers();
   }, []);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
-  return <ul>{users.map(u => <li key={u.id}>{u.name}</li>)}</ul>;
-};
-```
-
-### 5.2 Axios
-
-```jsx
-import axios from 'axios';
-
-const api = axios.create({
-  baseURL: '/api',
-  timeout: 10000,
-  headers: { 'Content-Type': 'application/json' }
-});
-
-api.interceptors.request.use((config) => {
-  const token = localStorage.getItem('token');
-  if (token) config.headers.Authorization = `Bearer ${token}`;
-  return config;
-});
-
-api.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    if (error.response?.status === 401) {
-      localStorage.removeItem('token');
-      window.location.href = '/login';
-    }
-    return Promise.reject(error);
-  }
-);
-
-const fetchUsers = () => api.get('/users');
-const createUser = (data) => api.post('/users', data);
-const updateUser = (id, data) => api.put(`/users/${id}`, data);
-const deleteUser = (id) => api.delete(`/users/${id}`);
-```
-
-### 5.3 React Query
-
-```jsx
-import { QueryClient, QueryClientProvider, useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 5 * 60 * 1000,
-      retry: 3,
-      refetchOnWindowFocus: false,
-    },
-  },
-});
-
-const Users = () => {
-  const { data, isLoading, error } = useQuery({
-    queryKey: ['users'],
-    queryFn: () => fetch('/api/users').then(res => res.json()),
-  });
-
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
-  return <ul>{data.map(u => <li key={u.id}>{u.name}</li>)}</ul>;
-};
-
-const CreateUser = () => {
-  const queryClient = useQueryClient();
-  const mutation = useMutation({
-    mutationFn: (newUser) => fetch('/api/users', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(newUser),
-    }).then(res => res.json()),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['users'] });
-    },
-  });
+  if (loading) return <p>Đang tải dữ liệu...</p>;
+  if (error) return <p>Lỗi: {error}</p>;
 
   return (
-    <button onClick={() => mutation.mutate({ name: 'New User' })}>
-      Create User
-    </button>
+    <ul>
+      {users.map((user) => (
+        <li key={user.id}>{user.name}</li>
+      ))}
+    </ul>
   );
-};
-```
-
-### 5.4 SWR
-
-```jsx
-import useSWR from 'swr';
-
-const fetcher = (url) => fetch(url).then(res => res.json());
-
-const UserProfile = ({ userId }) => {
-  const { data, error, isLoading } = useSWR(`/api/users/${userId}`, fetcher);
-
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error loading user</div>;
-  return <div><h2>{data.name}</h2></div>;
-};
-```
-
----
-
-## 6. Performance Optimization
-
-### 6.1 React.memo
-
-```jsx
-const MemoizedComponent = React.memo(({ data, onClick }) => {
-  return <div onClick={onClick}>{data.name}</div>;
-});
-```
-
-### 6.2 useMemo
-
-```jsx
-const sortedData = useMemo(() => {
-  return [...items].sort((a, b) => a.name.localeCompare(b.name));
-}, [items]);
-```
-
-### 6.3 useCallback
-
-```jsx
-const handleClick = useCallback((id) => {
-  console.log('Clicked:', id);
-}, []);
-```
-
-### 6.4 Code Splitting
-
-```jsx
-import { lazy, Suspense } from 'react';
-
-const LazyComponent = lazy(() => import('./HeavyComponent'));
-
-const App = () => {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <LazyComponent />
-    </Suspense>
-  );
-};
-```
-
-### 6.5 useTransition
-
-```jsx
-import { useTransition } from 'react';
-
-const TabComponent = () => {
-  const [isPending, startTransition] = useTransition();
-  const [tab, setTab] = useState('about');
-
-  const handleTabChange = (newTab) => {
-    startTransition(() => {
-      setTab(newTab);
-    });
-  };
-
-  return (
-    <div>
-      <button onClick={() => handleTabChange('about')}>About</button>
-      <button onClick={() => handleTabChange('contact')}>Contact</button>
-      {isPending ? <div>Loading...</div> : <TabContent tab={tab} />}
-    </div>
-  );
-};
-```
-
-### 6.6 Lazy Loading Images
-
-```jsx
-const LazyImage = ({ src, alt }) => {
-  const [isLoaded, setIsLoaded] = useState(false);
-  return (
-    <img
-      src={src}
-      alt={alt}
-      loading="lazy"
-      onLoad={() => setIsLoaded(true)}
-      className={isLoaded ? 'loaded' : 'loading'}
-    />
-  );
-};
-```
-
----
-
-## 7. Testing
-
-### 7.1 Jest Basics
-
-```jsx
-test('adds 1 + 2 to equal 3', () => {
-  expect(1 + 2).toBe(3);
-});
-
-test('object assignment', () => {
-  const data = { one: 1 };
-  data['two'] = 2;
-  expect(data).toEqual({ one: 1, two: 2 });
-});
-```
-
-### 7.2 React Testing Library
-
-```jsx
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-
-test('renders counter with initial value', () => {
-  render(<Counter initialCount={0} />);
-  expect(screen.getByText('Count: 0')).toBeInTheDocument();
-});
-
-test('increments counter', async () => {
-  render(<Counter initialCount={0} />);
-  const button = screen.getByRole('button', { name: 'Increment' });
-  fireEvent.click(button);
-  expect(screen.getByText('Count: 1')).toBeInTheDocument();
-});
-
-test('form submission', async () => {
-  render(<LoginForm />);
-  await userEvent.type(screen.getByLabelText(/username/i), 'john');
-  await userEvent.type(screen.getByLabelText(/password/i), 'password123');
-  await userEvent.click(screen.getByRole('button', { name: /submit/i }));
-});
-```
-
-### 7.3 Testing Async Code
-
-```jsx
-test('fetches and displays users', async () => {
-  render(<Users />);
-  expect(screen.getByText(/loading/i)).toBeInTheDocument();
-  const users = await waitFor(() => screen.getAllByRole('listitem'));
-  expect(users).toHaveLength(2);
-});
-```
-
-### 7.4 Testing Custom Hooks
-
-```jsx
-import { renderHook, act } from '@testing-library/react';
-import { useCounter } from './useCounter';
-
-test('should increment', () => {
-  const { result } = renderHook(() => useCounter());
-  act(() => result.current.increment());
-  expect(result.current.count).toBe(1);
-});
-```
-
----
-
-## 8. Build Tools
-
-### 8.1 Vite
-
-```bash
-npm create vite@latest my-app -- --template react
-cd my-app
-npm install
-npm run dev
-npm run build
-```
-
-### 8.2 Webpack Configuration
-
-```javascript
-module.exports = {
-  entry: './src/index.js',
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.[contenthash].js',
-  },
-  module: {
-    rules: [
-      {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: { loader: 'babel-loader' },
-      },
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
-      },
-    ],
-  },
-};
-```
-
-### 8.3 Babel Configuration
-
-```json
-{
-  "presets": [
-    "@babel/preset-env",
-    ["@babel/preset-react", { "runtime": "automatic" }]
-  ]
 }
 ```
 
+## 10.2 Fetch hay Axios
+
+### Fetch
+
+- Có sẵn trong trình duyệt
+- Đơn giản
+- Đủ cho học tập và dự án nhỏ
+
+### Axios
+
+- Có interceptors
+- Tiện khi dự án có auth token, refresh token
+
+## 10.3 React Query / TanStack Query
+
+Dùng khi dự án lớn hơn để:
+
+- Cache data
+- Tự refetch
+- Quản lý loading / error tốt hơn
+- Xử lý mutation tiện hơn
+
+### Gợi ý học
+
+- Bắt đầu với `fetch`
+- Sau đó học `axios`
+- Khi đã có CRUD app, học `React Query`
+
+## 10.4 RESTful APIs
+
+- `GET /users`: lấy danh sách
+- `GET /users/:id`: lấy chi tiết
+- `POST /users`: tạo mới
+- `PUT /users/:id`: cập nhật toàn bộ
+- `PATCH /users/:id`: cập nhật một phần
+- `DELETE /users/:id`: xóa
+
+## 10.5 WebSocket
+
+Dùng cho dữ liệu real-time:
+
+- Chat
+- Notification
+- Dashboard cập nhật liên tục
+
 ---
 
-## 9. TypeScript Integration
+## 11. State Management
 
-### 9.1 Component Props
+## 11.1 Chọn công cụ nào
+
+### Mức 1: Local state
+
+Dùng `useState` hoặc `useReducer` nếu state chỉ nằm trong một vài component gần nhau.
+
+### Mức 2: Context API
+
+Dùng khi state cần chia sẻ rộng nhưng chưa quá phức tạp.
+
+### Mức 3: Redux Toolkit hoặc Zustand
+
+Dùng khi:
+
+- Ứng dụng lớn
+- Nhiều màn hình
+- Nhiều state dùng chung
+- Cần cấu trúc rõ và khả năng mở rộng tốt
+
+## 11.2 Context API
+
+Phù hợp với:
+
+- Theme
+- Auth cơ bản
+- Language
+- Settings
+
+## 11.3 Redux Toolkit
+
+Redux Toolkit là cách hiện đại để dùng Redux.
+
+Bạn thường sẽ có:
+
+- `store`
+- `slice`
+- `actions`
+- `reducers`
+- `asyncThunk`
+
+## 11.4 Zustand
+
+Zustand gọn và dễ bắt đầu hơn Redux Toolkit.
+
+```jsx
+import { create } from "zustand";
+
+const useCounterStore = create((set) => ({
+  count: 0,
+  increment: () => set((state) => ({ count: state.count + 1 }))
+}));
+```
+
+### Gợi ý thứ tự học
+
+- Muốn dễ tiếp cận: Context -> Zustand -> Redux Toolkit
+- Muốn theo hướng doanh nghiệp phổ biến: Context -> Redux Toolkit
+
+---
+
+## 12. TypeScript với React
+
+Nếu muốn đi làm lâu dài, TypeScript rất nên học.
+
+## 12.1 Props typing
 
 ```tsx
-interface ButtonProps {
+type ButtonProps = {
   label: string;
-  variant?: 'primary' | 'secondary';
   onClick?: () => void;
-  disabled?: boolean;
-}
+  variant?: "primary" | "secondary";
+};
 
-const Button: React.FC<ButtonProps> = ({ label, variant = 'primary', onClick, disabled }) => {
+function Button({ label, onClick, variant = "primary" }: ButtonProps) {
   return (
-    <button className={`btn-${variant}`} onClick={onClick} disabled={disabled}>
+    <button className={`btn-${variant}`} onClick={onClick}>
       {label}
     </button>
   );
-};
+}
 ```
 
-### 9.2 State Types
+## 12.2 State typing
 
 ```tsx
-interface User {
-  id: string;
+type User = {
+  id: number;
   name: string;
   email: string;
-  role: 'admin' | 'user';
-}
+};
 
 const [users, setUsers] = useState<User[]>([]);
 const [selectedUser, setSelectedUser] = useState<User | null>(null);
 ```
 
-### 9.3 Custom Hooks
+### Lợi ích
 
-```tsx
-interface UseLocalStorageReturn<T> {
-  value: T;
-  setValue: (value: T | ((prev: T) => T)) => void;
-}
+- Gợi ý code tốt hơn
+- Giảm bug do sai kiểu dữ liệu
+- Refactor dễ hơn
+- Dễ đọc code của team
 
-function useLocalStorage<T>(key: string, initialValue: T): UseLocalStorageReturn<T> {
-  const [value, setValue] = useState<T>(() => {
-    const stored = localStorage.getItem(key);
-    return stored ? JSON.parse(stored) : initialValue;
-  });
+### Gợi ý học
 
-  useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(value));
-  }, [key, value]);
-
-  return { value, setValue };
-}
-```
+- Học React bằng JavaScript trước
+- Chuyển sang TypeScript sau khi đã hiểu bản chất React
 
 ---
 
-## 10. Best Practices
+## 13. Testing
 
-### 10.1 Project Structure
+Testing giúp bạn tự tin hơn khi sửa code.
 
-```
-src/
-├── components/       # Reusable UI components
-│   ├── Button/
-│   ├── Modal/
-│   └── Card/
-├── pages/            # Route components
-│   ├── Home/
-│   ├── About/
-│   └── Users/
-├── hooks/            # Custom hooks
-├── contexts/         # Context providers
-├── services/         # API calls
-├── utils/            # Helper functions
-├── types/            # TypeScript types
-└── styles/           # Global styles
-```
+## 13.1 Nên test gì
 
-### 10.2 Naming Conventions
+- Utility functions
+- Custom hooks
+- Component có logic quan trọng
+- User flow chính
+
+## 13.2 Jest và React Testing Library
+
+- Jest: test runner và assertion ecosystem
+- React Testing Library: test theo góc nhìn người dùng
 
 ```jsx
-// Components: PascalCase
-const UserProfile = () => {};
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
-// Hooks: camelCase với prefix "use"
-const useAuth = () => {};
-const useFetch = (url) => {};
+test("increment counter", async () => {
+  const user = userEvent.setup();
+  render(<Counter />);
 
-// Constants: SCREAMING_SNAKE_CASE
-const MAX_RETRY_COUNT = 3;
-const API_BASE_URL = '/api';
-
-// Files: kebab-case
-// user-profile.tsx, use-auth.ts, api-service.ts
+  await user.click(screen.getByRole("button", { name: /increment/i }));
+  expect(screen.getByText("Count: 1")).toBeInTheDocument();
+});
 ```
 
-### 10.3 Error Handling
+### Nguyên tắc quan trọng
+
+- Test hành vi, không test implementation detail
+- Ưu tiên `getByRole`, `getByLabelText`
+- Test loading, error, empty state
+
+---
+
+## 14. Performance Optimization
+
+Người mới thường học tối ưu quá sớm. Hãy nhớ:
+
+> Code dễ đọc và đúng trước, tối ưu sau.
+
+## Khi nào cần tối ưu
+
+- Re-render nhiều và thấy chậm
+- List lớn
+- Tính toán nặng
+- Bundle quá lớn
+
+## Công cụ phổ biến
+
+- `React.memo`
+- `useMemo`
+- `useCallback`
+- Code splitting với `lazy` và `Suspense`
+
+```jsx
+import { lazy, Suspense } from "react";
+
+const ReportPage = lazy(() => import("./ReportPage"));
+```
+
+### Sai lầm phổ biến
+
+- Bọc `useMemo` khắp nơi
+- Bọc `useCallback` cho mọi function
+- Tối ưu khi chưa đo được vấn đề
+
+---
+
+## 15. Code Structure và Best Practices
+
+## 15.1 Cấu trúc dễ dùng cho dự án vừa
+
+```txt
+src/
+  app/
+    router.jsx
+    providers.jsx
+  components/
+    common/
+    forms/
+    layout/
+  features/
+    auth/
+    users/
+    todos/
+  hooks/
+  pages/
+  services/
+  utils/
+  constants/
+  types/
+```
+
+### Cách hiểu
+
+- `components`: UI dùng lại được
+- `features`: logic theo domain
+- `pages`: màn hình gắn với router
+- `services`: nơi gọi API
+
+## 15.2 Naming convention
+
+- Component: `PascalCase`
+- Hook: `useSomething`
+- Function, variable: `camelCase`
+- Constant: `UPPER_SNAKE_CASE`
+
+## 15.3 Best practices quan trọng
+
+- Một component nên có một trách nhiệm rõ
+- Logic phức tạp nên tách ra helper hoặc custom hook
+- Không gọi API lung tung trong nhiều component nếu có thể tách service
+- Không hard-code string lặp lại ở nhiều nơi
+- Luôn có loading, error, empty state
+
+---
+
+## 16. Accessibility, Security, Error Handling
+
+## 16.1 Accessibility
+
+- Dùng semantic HTML
+- Input phải có `label`
+- Nút phải là `button`, không dùng `div` để click
+- Modal cần quản lý focus
+- Kiểm tra keyboard navigation
+
+```jsx
+<label htmlFor="email">Email</label>
+<input id="email" type="email" />
+```
+
+## 16.2 Security
+
+- Không tin user input
+- Không render HTML raw nếu chưa sanitize
+- Không hard-code secret trong frontend
+- Xử lý token cẩn thận
+- Validate cả client và server
+
+## 16.3 Error handling
+
+Bạn nên xử lý lỗi ở 3 tầng:
+
+1. Tầng UI: hiện thông báo lỗi cho người dùng
+2. Tầng API: bắt lỗi request
+3. Tầng app: Error Boundary
 
 ```jsx
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { hasError: false, error: null };
+    this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError(error) {
-    return { hasError: true, error };
-  }
-
-  componentDidCatch(error, errorInfo) {
-    console.error('Error:', error, errorInfo);
+  static getDerivedStateFromError() {
+    return { hasError: true };
   }
 
   render() {
     if (this.state.hasError) {
-      return <div>Something went wrong.</div>;
+      return <h2>Có lỗi xảy ra. Vui lòng thử lại.</h2>;
     }
+
     return this.props.children;
   }
 }
 ```
 
-### 10.4 Responsive Design
-
-```jsx
-const useMediaQuery = (query) => {
-  const [matches, setMatches] = useState(window.matchMedia(query).matches);
-  useEffect(() => {
-    const mq = window.matchMedia(query);
-    const handler = (e) => setMatches(e.matches);
-    mq.addEventListener('change', handler);
-    return () => mq.removeEventListener('change', handler);
-  }, [query]);
-  return matches;
-};
-
-const ResponsiveComponent = () => {
-  const isMobile = useMediaQuery('(max-width: 768px)');
-  const isTablet = useMediaQuery('(min-width: 769px) and (max-width: 1024px)');
-
-  return (
-    <div>
-      {isMobile && <MobileLayout />}
-      {isTablet && <TabletLayout />}
-      {!isMobile && !isTablet && <DesktopLayout />}
-    </div>
-  );
-};
-```
-
 ---
 
-## 11. Security Considerations
+## 17. Build Tools và Deployment
 
-### 11.1 XSS Prevention
+## 17.1 Vite
 
-```jsx
-// ❌ Dangerous - raw HTML
-const DangerousComponent = ({ content }) => {
-  return <div dangerouslySetInnerHTML={{ __html: content }} />;
-};
+Nên dùng cho dự án mới và đa số SPA thông thường.
 
-// ✅ Safe - sanitize HTML hoặc escape
-const SafeComponent = ({ content }) => {
-  return <div>{content}</div>;
-};
-```
+## 17.2 Webpack và Babel
 
-### 11.2 CSRF Protection
+- Webpack: đóng gói source code
+- Babel: chuyển đổi cú pháp JavaScript / JSX
 
-```jsx
-const api = axios.create({ baseURL: '/api' });
-api.interceptors.request.use((config) => {
-  const token = document.querySelector('meta[name="csrf-token"]')?.content;
-  if (token) config.headers['X-CSRF-Token'] = token;
-  return config;
-});
-```
+Người mới không cần đào ngay vào cấu hình Webpack.
 
-### 11.3 Authentication
+## 17.3 Deployment
 
-```jsx
-const ProtectedRoute = ({ children }) => {
-  const { user, loading } = useAuth();
+Đơn giản nhất:
 
-  if (loading) return <div>Loading...</div>;
-  if (!user) return <Navigate to="/login" />;
-  return children;
-};
-```
-
-### 11.4 Input Validation
-
-```jsx
-import { z } from 'zod';
-
-const userSchema = z.object({
-  email: z.string().email('Invalid email format'),
-  password: z.string().min(8, 'Password must be at least 8 characters'),
-  age: z.number().min(18, 'Must be at least 18'),
-});
-
-const validateUser = (data) => {
-  const result = userSchema.safeParse(data);
-  if (!result.success) {
-    return { valid: false, errors: result.error.flatten() };
-  }
-  return { valid: true, data: result.data };
-};
-```
-
----
-
-## 12. Accessibility (a11y)
-
-### 12.1 Semantic HTML
-
-```jsx
-// ❌ Bad
-<div onClick={onClick}>Click me</div>
-
-// ✅ Good
-<button onClick={onClick}>Click me</button>
-```
-
-### 12.2 ARIA Labels
-
-```jsx
-<button aria-label="Close modal" onClick={onClose}>
-  <span aria-hidden="true">×</span>
-</button>
-
-<input
-  type="text"
-  aria-label="Search"
-  aria-describedby="search-hint"
-/>
-<p id="search-hint">Type to search for items</p>
-```
-
-### 12.3 Keyboard Navigation
-
-```jsx
-const KeyboardNav = () => {
-  const [focusIndex, setFocusIndex] = useState(0);
-
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'ArrowDown') setFocusIndex(prev => (prev + 1) % items.length);
-      if (e.key === 'ArrowUp') setFocusIndex(prev => (prev - 1 + items.length) % items.length);
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
-
-  return (
-    <div role="listbox" tabIndex={0}>
-      {items.map((item, index) => (
-        <div
-          key={item.id}
-          role="option"
-          aria-selected={index === focusIndex}
-          tabIndex={index === focusIndex ? 0 : -1}
-        >
-          {item.name}
-        </div>
-      ))}
-    </div>
-  );
-};
-```
-
-### 12.4 Focus Management
-
-```jsx
-const Modal = ({ isOpen, onClose }) => {
-  const modalRef = useRef(null);
-
-  useEffect(() => {
-    if (isOpen) {
-      modalRef.current?.focus();
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-  }, [isOpen]);
-
-  return isOpen ? (
-    <div ref={modalRef} tabIndex={-1} role="dialog" aria-modal="true">
-      <button onClick={onClose}>Close</button>
-    </div>
-  ) : null;
-};
-```
-
----
-
-## 13. Design Patterns
-
-### 13.1 Container/Presentational
-
-```jsx
-const UserListContainer = () => {
-  const [users, setUsers] = useState([]);
-  useEffect(() => { fetchUsers().then(setUsers); }, []);
-  return <UserListPresenter users={users} />;
-};
-
-const UserListPresenter = ({ users }) => {
-  return (
-    <ul>
-      {users.map(user => <li key={user.id}>{user.name}</li>)}
-    </ul>
-  );
-};
-```
-
-### 13.2 Higher Order Components
-
-```jsx
-const withLoading = (Component) => {
-  return ({ isLoading, ...props }) => {
-    if (isLoading) return <div>Loading...</div>;
-    return <Component {...props} />;
-  };
-};
-
-const UserListWithLoading = withLoading(UserList);
-```
-
-### 13.3 Compound Components
-
-```jsx
-const Tabs = ({ children }) => {
-  const [activeTab, setActiveTab] = useState(0);
-  return (
-    <TabsContext.Provider value={{ activeTab, setActiveTab }}>
-      {children}
-    </TabsContext.Provider>
-  );
-};
-
-Tabs.TabList = ({ children }) => <div role="tablist">{children}</div>;
-Tabs.Tab = ({ label, index }) => {
-  const { activeTab, setActiveTab } = useContext(TabsContext);
-  return (
-    <button
-      role="tab"
-      aria-selected={activeTab === index}
-      onClick={() => setActiveTab(index)}
-    >
-      {label}
-    </button>
-  );
-};
-Tabs.TabPanel = ({ index, children }) => {
-  const { activeTab } = useContext(TabsContext);
-  return activeTab === index ? <div>{children}</div> : null;
-};
-```
-
-### 13.4 Provider Pattern
-
-```jsx
-const AppProvider = ({ children }) => {
-  return (
-    <AuthProvider>
-      <ThemeProvider>
-        <ToastProvider>
-          {children}
-        </ToastProvider>
-      </ThemeProvider>
-    </AuthProvider>
-  );
-};
-```
-
----
-
-## 14. Deployment Strategies
-
-### 14.1 Vercel
+- Vercel
+- Netlify
 
 ```bash
-npm install -g vercel
-vercel --prod
+npm run build
 ```
 
-### 14.2 Netlify
+## 17.4 CI/CD
 
-```bash
-npm install -g netlify-cli
-netlify deploy --prod
-```
+Đây là quy trình tự động:
 
-### 14.3 Docker
+- cài dependency
+- chạy test
+- build
+- deploy
 
-```dockerfile
-FROM node:18-alpine AS builder
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci
-COPY . .
-RUN npm run build
-
-FROM nginx:alpine
-COPY --from=builder /app/dist /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/nginx.conf
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
-```
-
-### 14.4 CI/CD Pipeline
-
-```yaml
-# GitHub Actions
-name: CI/CD
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-      - name: Install dependencies
-        run: npm ci
-      - name: Run tests
-        run: npm test
-      - name: Build
-        run: npm run build
-      - name: Deploy
-        run: npm run deploy
-```
+Người mới nên biết khái niệm trước, chưa cần master ngay.
 
 ---
 
-## 15. Learning Roadmap
+## 18. Design Patterns thường gặp
 
-```
-Giai đoạn 1: Cơ bản (2-3 tuần)
-├── HTML/CSS nâng cao
-├── JavaScript ES6+
-├── DOM Manipulation
-└── Async JavaScript (Promises, async/await)
+Không cần học hết ngay. Hãy ghi nhớ để khi gặp trong dự án thì nhận ra.
 
-Giai đoạn 2: React Fundamentals (3-4 tuần)
-├── Components (Functional & Class)
-├── JSX
-├── Props và State
-├── Event Handling
-├── Conditional Rendering
-├── Lists và Keys
-└── Forms cơ bản
+## 18.1 Presentational và Container
 
-Giai đoạn 3: React Hooks (2-3 tuần)
-├── useState, useEffect
-├── useContext
-├── useReducer
-├── useCallback, useMemo
-├── useRef
-└── Custom Hooks
+- Presentational: tập trung vào UI
+- Container: tập trung vào data và logic
 
-Giai đoạn 4: React Router (1-2 tuần)
-├── Basic Routing
-├── Dynamic Routes
-├── Nested Routes
-├── Protected Routes
-└── Navigation
+## 18.2 Custom Hooks Pattern
 
-Giai đoạn 5: State Management (2-3 tuần)
-├── Context API
-├── Redux Toolkit
-├── Zustand
-└── React Query/SWR
+Tách logic khỏi component UI.
 
-Giai đoạn 6: Advanced Topics (3-4 tuần)
-├── Performance Optimization
-├── Testing (Jest, RTL)
-├── TypeScript
-├── Security Best Practices
-├── Accessibility
-└── Design Patterns
+## 18.3 Compound Components
 
-Giai đoạn 7: Build & Deploy (1-2 tuần)
-├── Vite/Webpack
-├── Docker
-├── Vercel/Netlify
-├── CI/CD
-└── Monitoring
-```
+Dùng cho UI phức tạp như:
+
+- Tabs
+- Accordion
+- Modal
+
+## 18.4 Provider Pattern
+
+Dùng để bao quanh app bằng các context provider.
+
+### Thứ tự ưu tiên học
+
+1. Component composition
+2. Custom hooks
+3. Provider pattern
+4. Compound components
+5. HOC và render props để đọc code cũ
 
 ---
 
-## 16. Checklist Đánh Giá Code Quality
+## 19. Dự án thực hành theo lộ trình
 
-### 16.1 Functionality
-- [ ] Component hoạt động đúng như mong đợi
-- [ ] Xử lý tất cả edge cases
-- [ ] Error handling đầy đủ
-- [ ] Loading states được hiển thị
-- [ ] Empty states được xử lý
+## 19.1 Dự án 1: Todo App
 
-### 16.2 Code Structure
-- [ ] Component có một responsibility duy nhất
-- [ ] KHÔNG có code trùng lặp (DRY)
-- [ ] Tên biến và hàm có ý nghĩa (meaningful names)
-- [ ] KHÔNG có commented-out code
-- [ ] Import statements có tổ chức
+### Mục tiêu
 
-### 16.3 Performance
-- [ ] KHÔNG có unnecessary re-renders
-- [ ] useMemo/useCallback được sử dụng khi cần thiết
-- [ ] Images được lazy load
-- [ ] Heavy computations được memoized
-- [ ] Code splitting được áp dụng
+- Component
+- Props
+- State
+- Event handling
+- Conditional rendering
+- Form
+- Local storage
 
-### 16.4 React Best Practices
-- [ ] Functional components thay vì Class components
-- [ ] Props là read-only
-- [ ] State updates là immutable
-- [ ] Side effects trong useEffect
-- [ ] Cleanup functions trong useEffect
+### Tính năng
 
-### 16.5 TypeScript
-- [ ] Props được type correctly
-- [ ] State có kiểu rõ ràng
-- [ ] KHÔNG có any types không cần thiết
-- [ ] Interfaces/types được tái sử dụng
+- Thêm, sửa, xóa todo
+- Đánh dấu hoàn thành
+- Lọc all / active / completed
+- Lưu dữ liệu `localStorage`
 
-### 16.6 Security
-- [ ] User input được validate
-- [ ] KHÔNG có sensitive data hardcoded
-- [ ] XSS prevention
-- [ ] Authentication/Authorization checks
+## 19.2 Dự án 2: Blog CRUD App
 
-### 16.7 Accessibility
-- [ ] Semantic HTML được sử dụng
-- [ ] ARIA labels khi cần thiết
-- [ ] Keyboard navigation hoạt động
-- [ ] Color contrast đủ
-- [ ] Screen reader compatible
+### Mục tiêu
 
-### 16.8 Testing
-- [ ] Unit tests cho custom hooks
-- [ ] Component tests cho UI logic
-- [ ] Integration tests cho user flows
-- [ ] Coverage đạt >80%
+- Router
+- Fetch API / Axios
+- Loading / error state
+- Form validation
+- Deploy
 
-### 16.9 Documentation
-- [ ] Components có JSDoc comments
-- [ ] Complex logic có giải thích
-- [ ] README với setup instructions
-- [ ] API documentation
+### Tính năng
+
+- Danh sách bài viết
+- Trang chi tiết
+- Tạo / sửa / xóa bài viết
+- Search / pagination cơ bản
+
+## 19.3 Dự án 3: Admin Dashboard
+
+### Mục tiêu
+
+- Auth
+- State management
+- React Query
+- Role-based UI
+- Testing
+- TypeScript
+- Production structure
+
+### Tính năng
+
+- Login
+- Dashboard cards
+- Quản lý user
+- Quản lý permission
+- Charts
+- Responsive
 
 ---
 
-## Tài Liệu Tham Khảo
+## 20. Learning Roadmap để đi làm
+
+## Giai đoạn 1: Nền tảng JavaScript
+
+- ES6+
+- Array methods
+- async/await
+- object và array immutability
+
+## Giai đoạn 2: React core
+
+- JSX
+- component
+- props
+- state
+- render list
+- event
+- form
+
+## Giai đoạn 3: Hooks
+
+- `useState`
+- `useEffect`
+- `useContext`
+- `useReducer`
+- `useRef`
+
+## Giai đoạn 4: Làm 1 CRUD app
+
+- Router
+- API
+- loading / error / empty state
+- deploy lên Vercel / Netlify
+
+## Giai đoạn 5: State management và testing
+
+- Context
+- Redux Toolkit hoặc Zustand
+- React Query
+- Jest + React Testing Library
+
+## Giai đoạn 6: Production mindset
+
+- TypeScript
+- performance
+- accessibility
+- security
+- CI/CD
+
+### Mục tiêu cuối cùng
+
+Bạn có thể:
+
+- đọc hiểu code React của người khác
+- tự xây dựng một app hoàn chỉnh
+- biết cách tổ chức dự án
+- biết debug, test và deploy
+
+---
+
+## 21. Checklist đánh giá code quality
+
+## 21.1 React fundamentals
+
+- [ ] Component có tên rõ ràng
+- [ ] Props và state được tách rõ
+- [ ] Không mutate state trực tiếp
+- [ ] Dùng `key` đúng trong list
+- [ ] Không đặt quá nhiều logic vào một component
+
+## 21.2 UX và UI
+
+- [ ] Có loading state
+- [ ] Có error state
+- [ ] Có empty state
+- [ ] Form có validate
+- [ ] Responsive trên mobile
+
+## 21.3 Code maintainability
+
+- [ ] Cấu trúc thư mục dễ tìm
+- [ ] Tên file, hook, component thống nhất
+- [ ] Logic lặp lại đã được tách ra
+- [ ] Gọi API đã được tách thành service nếu cần
+
+## 21.4 Production readiness
+
+- [ ] Có test cho logic quan trọng
+- [ ] Có Error Boundary
+- [ ] Có xử lý auth cơ bản
+- [ ] Không hard-code secret
+- [ ] Đã tối ưu những nơi thực sự cần
+
+## 21.5 Accessibility và security
+
+- [ ] Input có label
+- [ ] Button dùng semantic đúng
+- [ ] Không dùng `dangerouslySetInnerHTML` bừa bãi
+- [ ] Validate input người dùng
+- [ ] Có thể thao tác bằng bàn phím
+
+---
+
+## 22. Tài liệu tham khảo
 
 1. [React Official Documentation](https://react.dev)
-2. [React Hooks API Reference](https://react.dev/reference/react)
-3. [React Router Documentation](https://reactrouter.com)
-4. [Redux Toolkit Documentation](https://redux-toolkit.js.org)
-5. [TanStack Query Documentation](https://tanstack.com/query)
+2. [React Router Documentation](https://reactrouter.com)
+3. [Redux Toolkit Documentation](https://redux-toolkit.js.org)
+4. [TanStack Query Documentation](https://tanstack.com/query)
+5. [React Hook Form Documentation](https://react-hook-form.com)
 6. [Testing Library Documentation](https://testing-library.com)
 7. [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook)
-8. [Airbnb JavaScript Style Guide](https://airbnb.io/javascript/react)
-9. [WAI-ARIA Practices](https://www.w3.org/WAI/ARIA/apg)
 
 ---
 
-*Document created: 2026-05-13*
-*Last updated: 2026-05-13*
-*Version: 1.0*
+## Tổng kết
+
+Nếu bạn là người mới, đừng cố học hết React trong một lần đọc.
+
+Hãy nhớ thứ tự:
+
+1. Hiểu `component`, `props`, `state`
+2. Hiểu `useEffect` và API
+3. Làm 1 CRUD app
+4. Học router, global state, testing
+5. Sau cùng mới đào sâu tối ưu, architecture, deployment và patterns
+
+> React không khó vì cú pháp. React khó ở chỗ bạn phải hiểu cách dữ liệu chảy, state thay đổi và giao diện được tổ chức.
+
+Nếu bạn đi đúng thứ tự, React sẽ dễ hơn rất nhiều.
+
+---
+
+*Document created: 2026-05-13*  
+*Last updated: 2026-05-13*  
+*Version: 2.1*
